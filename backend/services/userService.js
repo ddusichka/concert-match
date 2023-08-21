@@ -4,8 +4,8 @@ const { v4: uuidv4 } = require("uuid");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const getUsers = async () => {
-  return await User.find({}).sort({ createdAt: -1 });
+const getUser = async (userId) => {
+  return await User.findOne({ _id: userId });
 };
 
 const signUp = async (req) => {
@@ -53,29 +53,29 @@ const logIn = async (req) => {
   }
 
   const token = jwt.sign(
-    { user_id: user.user_id, email: user.user_id },
+    { user_id: user.user_id, email: user.email },
     process.env.JWT_SECRET,
     { expiresIn: 60 * 24 }
   );
 
+  console.log(token);
+
   return { token, user };
 };
 
-const swipe = async () => {
-  const { direction, userId, id } = req;
-
+const swipe = async (direction, userId, concertId) => {
   const user = await User.findOneAndUpdate(
-    { user_id: userId },
-    { $push: { seenConcerts: id } }
+    { _id: userId },
+    { $push: { seenConcerts: concertId } }
   );
 
   if (direction == "right") {
     const userMatch = await User.findOneAndUpdate(
-      { user_id: userId },
-      { $push: { matches: id } }
+      { _id: userId },
+      { $push: { matches: concertId } }
     );
   }
-
+  console.log(user);
   return user;
 };
 
@@ -86,10 +86,4 @@ const getUserInterests = async (userId) => {
   return concerts;
 };
 
-module.exports = {
-  getUsers,
-  signUp,
-  logIn,
-  swipe,
-  getUserInterests,
-};
+module.exports = { getUser, signUp, logIn, swipe, getUserInterests };

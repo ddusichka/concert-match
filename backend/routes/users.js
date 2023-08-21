@@ -1,20 +1,19 @@
 const express = require("express");
 const {
-  signUp,
-  getUsers,
-  logIn,
-  // addGroup,
-  swipe,
+  getUser,
   getUserInterests,
+  signUp,
+  logIn,
+  react,
 } = require("../controllers/userController");
 
 const router = express.Router();
 
-// GET all concerts in the US
-router.get("/", getUsers);
+// GET an individual user
+router.get("/:id", getUser);
 
-// GET a single workout
-// router.get("/:id", getWorkout);
+// GET an individual user's interests
+router.get("/:id/interests", getUserInterests);
 
 // POST a new user
 router.post("/signup", signUp);
@@ -22,16 +21,7 @@ router.post("/signup", signUp);
 // POST a user logging in
 router.post("/login", logIn);
 
-// router.post("/group", addGroup);
-
-router.post("/react", swipe);
-
-router.get("/:id/interests", getUserInterests);
-
-// DELETE a workout
-// router.delete("/:id", deleteWorkout);
-
-// UPDATE a workout
-// router.patch("/:id", updateWorkout);
+// POST a user's reaction
+router.post("/react", react);
 
 module.exports = router;

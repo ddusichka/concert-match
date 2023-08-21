@@ -2,10 +2,11 @@ const userService = require("../services/userService");
 
 // This file is for defining routes
 
-// GET all users - I don't think we need this.
-const getUsers = async (req, res) => {
+// GET user
+const getUser = async (req, res) => {
   try {
-    const users = await userService.getUsers();
+    const userId = req.params.id;
+    const users = await userService.getUser(userId);
     res.status(200).json(users);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -24,7 +25,7 @@ const signUp = async (req, res) => {
 
 const logIn = async (req, res) => {
   try {
-    const user = await userService.logIn(req.body);
+    const { token, user } = await userService.logIn(req.body);
     res.status(201).json({ token, user });
   } catch (error) {
     console.log(error);
@@ -32,9 +33,11 @@ const logIn = async (req, res) => {
   }
 };
 
-const swipe = async (req, res) => {
+const react = async (req, res) => {
   try {
-    const user = await userService.swipe(req.body);
+    const { direction, userId, concertId } = req.body;
+    console.log(req.body);
+    const user = await userService.swipe(direction, userId, concertId);
 
     if (!user) {
       return res.status(400).json({ message: "No such user" });
@@ -77,10 +80,10 @@ const getUserInterests = async (req, res) => {
 // };
 
 module.exports = {
-  getUsers,
+  getUser,
   signUp,
   logIn,
   // addGroup,
-  swipe,
+  react,
   getUserInterests,
 };
