@@ -1,13 +1,328 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700;800&display=swap");
+
+/* Global Styles */
+html,
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  text-align: center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h2 {
+  font-style: italic;
+}
+
+* {
+  font-family: "Readex Pro", sans-serif;
+}
+
+/* Buttons */
+.primary-button,
+.secondary-button {
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: linear-gradient(45deg, rgb(254, 48, 114), rgb(255, 89, 64));
+  color: rgb(255, 255, 255);
+}
+
+.primary-button:hover {
+  background: linear-gradient(260deg, rgb(254, 48, 114), rgb(255, 89, 64));
+}
+
+.secondary-button {
+  background-color: rgb(255, 255, 255);
+  color: rgb(121, 119, 119);
+  font-weight: 500;
+  border: solid 2px rgb(121, 119, 119);
+  margin: 6px;
+}
+
+.secondary-button:hover {
+  background-color: rgb(235, 235, 235);
+  color: rgb(48, 48, 48);
+  border-color: rgb(48, 48, 48);
+}
+
+/* Navbar */
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav .nav-button {
+  font-size: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+  color: rgb(254, 48, 114);
+  background-color: rgb(255, 255, 255);
+}
+
+nav .nav-button:disabled {
+  background-color: rgb(181, 180, 180);
+  color: rgb(189, 42, 90);
+}
+
+nav .logo-container {
+  width: 170px;
+  margin: 15px;
+}
+
+nav .logo-container .logo {
+  width: 40%;
+}
+
+/* Home Page */
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.home {
+  margin-top: 30vh;
+}
+
+/* Auth Modal */
+.auth-modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 360px;
+  height: 600px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.auth-modal .close-icon {
+  float: right;
+}
+
+.auth-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-modal input[type="password"],
+.auth-modal input[type="email"],
+.auth-modal input[type="name"] {
+  padding: 8px;
+  margin: 8px;
+  font-size: 17px;
+}
+
+/* OnBoarding Page */
+.onboarding {
+  border-top: solid 1px rgb(213, 213, 213);
+}
+
+.onboarding form {
+  display: flex;
+  justify-content: center;
+}
+
+.onboarding form section {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 35%;
+  text-align: start;
+}
+
+.onboarding form input {
+  padding: 15px 30px;
+  margin: 10px 0;
+  font-size: 15px;
+  border: solid 2px rgb(219, 219, 219);
+  border-radius: 10px;
+}
+
+.onboarding form label {
+  margin: 10px 0;
+}
+
+.onboarding form .multiple-input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.onboarding form input::-webkit-outer-spin-button,
+.onboarding form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.onboarding form .multiple-input-container input {
+  margin-right: 10px;
+}
+
+.onboarding form .multiple-input-container label {
+  padding: 10px;
+  border: solid 2px rgb(144, 144, 144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+
+.onboarding form input[type="radio"] {
+  display: none;
+}
+
+.onboarding form input[type="number"] {
+  width: 10%;
+}
+
+.onboarding form input[type="radio"]:checked + label {
+  border: solid 2px rgb(221, 39, 22);
+}
+
+.onboarding form input[type="submit"]:hover {
+  background-color: rgb(235, 235, 235);
+}
+
+.onboarding form input[type="submit"]:active {
+  background-color: rgb(226, 115, 115);
+}
+
+.onboarding form .photo-container img {
+  width: 100%;
+}
+
+/* Dashboard */
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard .swipe-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Cards */
+.swipe {
+  position: absolute;
+}
+
+.cardContainer {
+  width: 90vw;
+  max-width: 260px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align horizontally */
+  justify-content: center; /* Center align vertically */
+  margin: auto;
+}
+
+.card {
+  position: relative;
+  background-color: #fff;
+  width: 80vw;
+  max-width: 260px;
+  height: 300px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.cardContent {
+  width: 100%;
+  height: 100%;
+}
+
+.card h3 {
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  color: #fff;
+}
+
+.infoText {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  color: #fff;
+  animation-name: popup;
+  animation-duration: 800ms;
+}
+
+.buttons {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center align horizontally */
+}
+
+@media (max-width: 625px) {
+  .buttons {
+    flex-direction: column;
+  }
+}
+
+.buttons button {
+  flex-shrink: 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  background-color: #9198e5;
+  transition: 200ms;
+  margin: 10px;
+  font-weight: bolder;
+  width: 160px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+}
+
+.buttons button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(1, 1);
+  }
+  10% {
+    transform: scale(1.1, 1.1);
+  }
+  30% {
+    transform: scale(0.9, 0.9);
+  }
+  50% {
+    transform: scale(1, 1);
+  }
+  57% {
+    transform: scale(1, 1);
+  }
+  64% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
