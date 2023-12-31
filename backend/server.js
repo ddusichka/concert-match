@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/users");
 const concertRoutes = require("./routes/concerts");
+const groupRoutes = require("./routes/groups");
+
 const cors = require("cors");
 
 const app = express();
@@ -19,6 +21,7 @@ app.use((req, res, next) => {
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/concerts", concertRoutes);
+app.use("/api/groups", groupRoutes);
 
 // connect to db
 mongoose

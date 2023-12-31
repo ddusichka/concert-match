@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
+const shortid = require("shortid");
 
 const Schema = mongoose.Schema;
 
 const groupSchema = new Schema(
   {
-    code: {
+    _id: {
+      type: String,
+      default: shortid.generate,
+    },
+    name: {
       type: String,
       required: true,
     },
-    location: {
+    shortId: {
       type: String,
-      required: true,
     },
     members: {
       type: [Schema.Types.ObjectId],
