@@ -9,20 +9,20 @@ const getUser = async (userId) => {
 };
 
 const signUp = async (req) => {
-  const { name, email, password } = req;
+  const { email, password } = req;
 
   const lower_email = email.toLowerCase();
   const existingUser = await User.findOne({ email: lower_email });
 
   if (existingUser) {
-    return res.status(409).send("User already exists. Please login instead.");
+    throw new Error("User already exists. Please login instead.");
   }
 
   const user_id = uuidv4().toString();
   const hashed_password = await bcrypt.hash(password, 10);
 
   const user = await User.create({
-    name: name,
+    name: "test name",
     user_id: user_id,
     email: lower_email,
     hashed_password: hashed_password,

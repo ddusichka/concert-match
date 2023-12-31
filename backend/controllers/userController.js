@@ -16,7 +16,7 @@ const getUser = async (req, res) => {
 // POST a new user
 const signUp = async (req, res) => {
   try {
-    userService.signUp(req.body);
+    const { token, user } = await userService.signUp(req.body);
     res.status(201).json({ token, user });
   } catch (error) {
     res.status(400).json({ message: error.message });
